@@ -11,6 +11,21 @@ class BookingRepository{
             throw {error};
         }
     }
+
+    async updateBooking(bookingId, data){
+        try{
+            const booking = await Booking.findByPk(bookingId);
+            if(data.status){
+                booking.status= data.status;
+            }
+            await booking.save();
+            return booking;
+        }
+        catch(error){
+            console.log("Error in Repository Layer");
+            throw{error};
+        }
+    }
 }
 
 module.exports = BookingRepository;
